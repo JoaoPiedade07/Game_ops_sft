@@ -183,8 +183,4 @@ public final class Chess extends Application {
         }
         return rst;
     }
-    
-    public static void main(String[] args) {
-        Application.launch(Chess.class, args);
-    }
 }
