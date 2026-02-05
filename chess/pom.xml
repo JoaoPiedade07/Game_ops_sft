@@ -26,6 +26,10 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>ru.job4j.chess.Chess</mainClass>
+                    <options>
+                        <option>-Dprism.order=sw</option>
+                        <option>-Dglass.platform=ios</option>
+                    </options>
                 </configuration>
             </plugin>
         </plugins>

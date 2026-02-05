@@ -23,6 +23,27 @@ public final class Chess extends Application {
     private final int size = 8;
     private final Logic logic = new Logic();
 
+    // No início da classe Chess, adicione:
+    static {
+        System.setProperty("prism.order", "sw");
+        System.setProperty("glass.platform", "ios");
+        System.setProperty("prism.verbose", "true");
+        System.setProperty("prism.forceGPU", "false");
+        System.setProperty("quantum.multithreaded", "false");
+        System.setProperty("javafx.animation.fullspeed", "true");
+
+        // Workaround específico para o bug do NSTrackingRectTag
+        System.setProperty("glass.win.uiScale", "100%");
+        System.setProperty("glass.gtk.uiScale", "100%");
+
+        // Force early initialization
+        try {
+            Class.forName("javafx.application.Platform");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     private Rectangle buildRectangle(int x, int y, int size, boolean white) {
         Rectangle rect = new Rectangle();
         rect.setX(x * size);
