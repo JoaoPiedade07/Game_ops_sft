@@ -10,7 +10,6 @@ public class TestRunnerAll {
         System.out.println("\n📋  LISTA DE TESTES DO XADREZ");
         System.out.println("════════════════════════════════════════════");
 
-        // Lista de testes sem saber resultado ainda
         List<String> testNames = Arrays.asList(
                 "PawnWhiteMoveTest - Movimento válido do peão branco",
                 "PawnInvalidMoveTest - Movimento inválido do peão",
@@ -27,7 +26,6 @@ public class TestRunnerAll {
                 "ru.job4j.chess.BishopInvalidMoveTest"
         );
 
-        // Mostra lista ANTES de executar (sem ✅/❌)
         for (int i = 0; i < testNames.size(); i++) {
             System.out.println("  " + (i + 1) + ". " + testNames.get(i));
         }
@@ -36,23 +34,19 @@ public class TestRunnerAll {
         System.out.println("════════════════════════════════════════════\n");
 
         try {
-            // Carrega as classes
             Class<?>[] testClassesArray = new Class[testClasses.size()];
             for (int i = 0; i < testClasses.size(); i++) {
                 testClassesArray[i] = Class.forName(testClasses.get(i));
             }
 
-            // Execute todos os testes
             Result result = JUnitCore.runClasses(testClassesArray);
 
-            // Mapa para rastrear quais testes falharam
             Set<String> failedTests = new HashSet<>();
             for (Failure failure : result.getFailures()) {
                 String className = failure.getDescription().getClassName();
                 failedTests.add(className);
             }
 
-            // Mostra resultado DEPOIS da execução
             System.out.println("\n════════════════════════════════════════════");
             System.out.println("RESULTADO DOS TESTES:");
             System.out.println("════════════════════════════════════════════");
@@ -75,7 +69,6 @@ public class TestRunnerAll {
             System.out.println("Testes que falharam: " + result.getFailureCount());
             System.out.println("Tempo total: " + result.getRunTime() + "ms");
 
-            // Se houver falhas, mostra detalhes
             if (!result.wasSuccessful()) {
                 System.out.println("");
                 System.out.println("════════════════════════════════════════════");
@@ -92,7 +85,6 @@ public class TestRunnerAll {
                     if (failure.getException() != null) {
                         System.out.println("   Exceção: " +
                                 failure.getException().getClass().getSimpleName());
-                        // Mostra só a primeira linha da stack trace para não poluir
                         if (failure.getException().getMessage() != null) {
                             System.out.println("   Detalhe: " +
                                     failure.getException().getMessage().split("\n")[0]);
