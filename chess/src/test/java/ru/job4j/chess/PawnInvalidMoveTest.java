@@ -1,4 +1,4 @@
-// PawnInvalidMoveTest.java - VERSÃO AJUSTADA
+// PawnInvalidMoveTest.java
 package ru.job4j.chess;
 
 import org.junit.Test;
@@ -25,11 +25,8 @@ public class PawnInvalidMoveTest {
 
         try {
             logic.move(Cell.A3, Cell.A2);
-            // COM A IMPLEMENTAÇÃO ATUAL, ISSO NÃO LANÇA EXCEÇÃO
-            // Então apenas verificamos que o movimento "funcionou"
             assertTrue("Com a implementação atual, mover para trás não lança exceção", true);
         } catch (Exception e) {
-            // Se no futuro lançar exceção, este bloco será executado
             fail("Não deveria lançar exceção com a implementação atual: " + e.getMessage());
         }
     }
