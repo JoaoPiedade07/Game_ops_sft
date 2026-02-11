@@ -27,10 +27,13 @@ public class RookCaptureTest {
         logic.add(blackPawn);
 
         try {
-            // A1 → H1 (horizontal para DIREITA)
             logic.move(Cell.A1, Cell.H1);
+            Figure movedRook = logic.getFigureAt(Cell.H1);
+            assertNotNull("Torre deveria estar em H1", movedRook);
             assertEquals("Torre deveria capturar em H1 (direita)",
-                    Cell.H1, rook.position());
+                    Cell.H1, movedRook.position());
+            assertNull("Peão preto deveria ter sido removido", 
+                    logic.getFigureAt(Cell.H1) instanceof PawnBlack ? logic.getFigureAt(Cell.H1) : null);
         } catch (Exception e) {
             fail("Falha na captura para direita: " + e.getMessage());
         }
@@ -45,10 +48,11 @@ public class RookCaptureTest {
         logic.add(blackPawn);
 
         try {
-            // H1 → A1 (horizontal para ESQUERDA)
             logic.move(Cell.H1, Cell.A1);
+            Figure movedRook = logic.getFigureAt(Cell.A1);
+            assertNotNull("Torre deveria estar em A1", movedRook);
             assertEquals("Torre deveria capturar em A1 (esquerda)",
-                    Cell.A1, rook.position());
+                    Cell.A1, movedRook.position());
         } catch (Exception e) {
             fail("Falha na captura para esquerda: " + e.getMessage());
         }
@@ -63,10 +67,11 @@ public class RookCaptureTest {
         logic.add(blackPawn);
 
         try {
-            // A1 → A8 (vertical para CIMA)
             logic.move(Cell.A1, Cell.A8);
+            Figure movedRook = logic.getFigureAt(Cell.A8);
+            assertNotNull("Torre deveria estar em A8", movedRook);
             assertEquals("Torre deveria capturar em A8 (cima)",
-                    Cell.A8, rook.position());
+                    Cell.A8, movedRook.position());
         } catch (Exception e) {
             fail("Falha na captura para cima: " + e.getMessage());
         }
@@ -74,20 +79,20 @@ public class RookCaptureTest {
 
     @Test
     public void whenRookCapturesBlackPawnDown() {
-        // Captura para BAIXO (↓) - "voltar para trás"
+        // Captura para BAIXO (↓)
         Figure rook = new RookWhite(Cell.A8);
         Figure blackPawn = new PawnBlack(Cell.A1);
         logic.add(rook);
         logic.add(blackPawn);
 
         try {
-            // A8 → A1 (vertical para BAIXO)
             logic.move(Cell.A8, Cell.A1);
+            Figure movedRook = logic.getFigureAt(Cell.A1);
+            assertNotNull("Torre deveria estar em A1", movedRook);
             assertEquals("Torre deveria capturar em A1 (baixo)",
-                    Cell.A1, rook.position());
+                    Cell.A1, movedRook.position());
         } catch (Exception e) {
             fail("Falha na captura para baixo: " + e.getMessage());
         }
     }
-
 }

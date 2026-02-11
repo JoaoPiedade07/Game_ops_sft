@@ -24,26 +24,33 @@ public class PawnWhiteMoveTest {
 
         try {
             logic.move(Cell.A2, Cell.A3);
-
+            
+            Figure movedPawn = logic.getFigureAt(Cell.A3);
+            assertNotNull("Peão deveria estar em A3", movedPawn);
             assertEquals("Peão deveria estar em A3 após mover",
-                    Cell.A3, pawn.position());
+                    Cell.A3, movedPawn.position());
+            
+            assertNull("Posição original deveria estar vazia", 
+                    logic.getFigureAt(Cell.A2));
 
         } catch (Exception e) {
             fail("Movimento válido falhou: " + e.getMessage());
         }
     }
 
-
     @Test
     public void whenWhitePawnMovesTwoForwardOnFirstMove() {
-        // Peão pode mover 2 casas no PRIMEIRO movimento
         Figure pawn = new PawnWhite(Cell.A2);
         logic.add(pawn);
 
         try {
             logic.move(Cell.A2, Cell.A4);
+            
+            Figure movedPawn = logic.getFigureAt(Cell.A4);
+            assertNotNull("Peão deveria estar em A4", movedPawn);
             assertEquals("Peão deveria poder mover 2 casas no primeiro movimento",
-                    Cell.A4, pawn.position());
+                    Cell.A4, movedPawn.position());
+
         } catch (Exception e) {
             fail("Movimento de 2 casas falhou: " + e.getMessage());
         }
@@ -51,16 +58,17 @@ public class PawnWhiteMoveTest {
 
     @Test
     public void whenWhitePawnCannotMoveThreeForward() {
-        // Peão NUNCA pode mover 3 casas
         Figure pawn = new PawnWhite(Cell.A2);
         logic.add(pawn);
 
         try {
-            logic.move(Cell.A2, Cell.A5);  // 3 casas - INVÁLIDO!
+            logic.move(Cell.A2, Cell.A5);
             fail("Peão não deveria mover 3 casas!");
-        } catch (Exception e) {
-            // Correto - deveria falhar
+        } catch (ImpossibleMoveException e) {
+            // Sucesso - exceção esperada
             assertTrue("Peão não pode mover 3 casas", true);
+        } catch (Exception e) {
+            fail("Exceção errada: " + e.getClass().getSimpleName());
         }
     }
 }

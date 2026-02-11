@@ -24,8 +24,15 @@ public class KnightMoveTest {
 
         try {
             logic.move(Cell.B1, Cell.C3);
+            Figure movedKnight = logic.getFigureAt(Cell.C3);
+            
+            assertNotNull("Cavalo deveria estar em C3", movedKnight);
             assertEquals("Após mover, cavalo deveria estar em C3",
-                    Cell.C3, knight.position());
+                    Cell.C3, movedKnight.position());
+            
+            // Verificar que a posição original está vazia
+            assertNull("Posição original deveria estar vazia", 
+                    logic.getFigureAt(Cell.B1));
 
         } catch (Exception e) {
             fail("ERRO ao mover cavalo: " + e.getClass().getSimpleName() +

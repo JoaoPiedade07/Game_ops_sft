@@ -3,12 +3,6 @@ package ru.job4j.chess.figures.white;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.Figure;
 
-/**
- *
- * @author Petr Arsentev (parsentev@yandex.ru)
- * @version $Id$
- * @since 0.1
- */
 public class BishopWhite implements Figure {
     private final Cell position;
 
@@ -23,9 +17,27 @@ public class BishopWhite implements Figure {
 
     @Override
     public Cell[] way(Cell dest) {
-        return new Cell[] {
-                dest
-        };
+        if (!isDiagonal(position, dest)) {
+            throw new IllegalStateException(
+                    String.format("Não é possível mover bispo de %s para %s", position, dest)
+            );
+        }
+        
+        int deltaX = Integer.compare(dest.getX(), position.getX());
+        int deltaY = Integer.compare(dest.getY(), position.getY());
+        int size = Math.abs(dest.getX() - position.getX());
+        
+        Cell[] steps = new Cell[size];
+        for (int index = 0; index < size; index++) {
+            int x = position.getX() + deltaX * (index + 1);
+            int y = position.getY() + deltaY * (index + 1);
+            steps[index] = Cell.findBy(x, y);
+        }
+        return steps;
+    }
+
+    private boolean isDiagonal(Cell source, Cell dest) {
+        return Math.abs(dest.getX() - source.getX()) == Math.abs(dest.getY() - source.getY());
     }
 
     @Override

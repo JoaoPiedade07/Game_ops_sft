@@ -28,9 +28,11 @@ public class PawnInvalidMoveTest {
 
         try {
             logic.move(Cell.E2, Cell.E3);
-
+            
+            Figure movedPawn = logic.getFigureAt(Cell.E3);
+            assertNotNull("Peão deveria estar em E3", movedPawn);
             assertEquals("Após mover E2→E3, peão deveria estar em E3",
-                    Cell.E3, pawn.position());
+                    Cell.E3, movedPawn.position());
 
             System.out.println("  ✅ PASSOU: Peão moveu corretamente para E3");
 
@@ -50,9 +52,11 @@ public class PawnInvalidMoveTest {
 
         try {
             logic.move(Cell.D2, Cell.D4);
-
+            
+            Figure movedPawn = logic.getFigureAt(Cell.D4);
+            assertNotNull("Peão deveria estar em D4", movedPawn);
             assertEquals("Peão deveria poder mover 2 casas no primeiro movimento",
-                    Cell.D4, pawn.position());
+                    Cell.D4, movedPawn.position());
 
             System.out.println("  ✅ PASSOU: Peão saltou 2 casas para D4");
 
@@ -72,14 +76,13 @@ public class PawnInvalidMoveTest {
 
         try {
             logic.move(Cell.E3, Cell.E2);
-
-            System.out.println("  ❌ ALERTA: Peão moveu para trás!");
             fail("❌ BUG: Peão NÃO deveria poder mover para trás (E3→E2)");
-
-        } catch (Exception e) {
+        } catch (ImpossibleMoveException e) {
             System.out.println("  ✅ PASSOU: Movimento bloqueado - " +
                     e.getClass().getSimpleName());
             assertTrue("Movimento inválido corretamente rejeitado", true);
+        } catch (Exception e) {
+            fail("Exceção errada: " + e.getClass().getSimpleName());
         }
     }
 }

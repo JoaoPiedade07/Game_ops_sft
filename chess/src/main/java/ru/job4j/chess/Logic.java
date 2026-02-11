@@ -14,28 +14,78 @@ public final class Logic {
 
     public void move(Cell source, Cell dest)
             throws FigureNotFoundException, ImpossibleMoveException, OccupiedCellException {
-        int index = findBy(source);
-        Cell[] steps = figures[index].way(dest);
-        free(steps);
-        figures[index] = figures[index].copy(dest);
+        
+        // 1. Encontrar a figura na posição source
+        int sourceIndex = findBy(source);
+        Figure figure = figures[sourceIndex];
+        
+        // 2. Calcular o caminho até ao destino
+        Cell[] steps;
+        try {
+            steps = figure.way(dest);
+        } catch (IllegalStateException e) {
+            throw new ImpossibleMoveException(e.getMessage());
+        }
+        
+        // 3. Verificar se o caminho está livre (exceto o destino)
+        for (int i = 0; i < steps.length - 1; i++) {
+            if (steps[i] != null && findByCell(steps[i]) != -1) {
+                throw new OccupiedCellException("Célula ocupada: " + steps[i]);
+            }
+        }
+        
+        // 4. Verificar o destino - pode ter peça adversária (captura)
+        int destIndex = findByCell(dest);
+        if (destIndex != -1) {
+            Figure destFigure = figures[destIndex];
+            
+            // Verificar se é da mesma cor
+            boolean sourceIsWhite = figure.getClass().getSimpleName().contains("White");
+            boolean destIsWhite = destFigure.getClass().getSimpleName().contains("White");
+            
+            if (sourceIsWhite == destIsWhite) {
+                throw new OccupiedCellException("Destino ocupado por peça da mesma cor");
+            }
+            
+            // REMOVER a peça capturada
+            figures[destIndex] = null;
+        }
+        
+        // 5. MOVER A PEÇA - substituir no mesmo índice
+        Figure movedFigure = figure.copy(dest);
+        figures[sourceIndex] = movedFigure;
     }
 
-    private boolean free(Cell[] steps) throws OccupiedCellException {
-        return true;
+    public Figure getFigureAt(Cell cell) {
+        int index = findByCell(cell);
+        if (index != -1) {
+            return figures[index];
+        }
+        return null;
+    }
+
+    private int findBy(Cell cell) throws FigureNotFoundException {
+        for (int i = 0; i < figures.length; i++) {
+            Figure figure = figures[i];
+            if (figure != null && figure.position().equals(cell)) {
+                return i;
+            }
+        }
+        throw new FigureNotFoundException("Figure not found on the board.");
+    }
+    
+    private int findByCell(Cell cell) {
+        for (int i = 0; i < figures.length; i++) {
+            Figure figure = figures[i];
+            if (figure != null && figure.position().equals(cell)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public void clean() {
         Arrays.fill(figures, null);
         index = 0;
-    }
-
-    private int findBy(Cell cell) throws FigureNotFoundException {
-        for (int index = 0; index != figures.length; index++) {
-            Figure figure = figures[index];
-            if (figure != null && figure.position().equals(cell)) {
-                return index;
-            }
-        }
-        throw new FigureNotFoundException("Figure not found on the board.");
     }
 }
