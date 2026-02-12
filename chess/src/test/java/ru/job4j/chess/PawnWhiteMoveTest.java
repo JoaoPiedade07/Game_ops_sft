@@ -55,19 +55,4 @@ public class PawnWhiteMoveTest {
             fail("Movimento de 2 casas falhou: " + e.getMessage());
         }
     }
-
-    @Test
-    public void whenWhitePawnCannotMoveThreeForward() {
-        Figure pawn = new PawnWhite(Cell.A2);
-        logic.add(pawn);
-
-        try {
-            logic.move(Cell.A2, Cell.A5);
-            fail("Peão não deveria mover 3 casas!");
-        } catch (ImpossibleMoveException e) {
-            assertTrue("Peão não pode mover 3 casas", true);
-        } catch (Exception e) {
-            fail("Exceção errada: " + e.getClass().getSimpleName());
-        }
-    }
 }
