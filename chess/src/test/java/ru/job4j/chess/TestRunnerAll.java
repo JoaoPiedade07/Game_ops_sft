@@ -15,7 +15,12 @@ public class TestRunnerAll {
                 "PawnInvalidMoveTest - Movimento inválido do peão",
                 "RookCaptureTest - Captura da torre",
                 "KnightMoveTest - Movimento do cavalo em L",
-                "BishopInvalidMoveTest - Movimento do bispo"
+                "BishopInvalidMoveTest - Movimento do bispo",
+                "FigureNotFoundExceptionTest - Exceção quando não há peça na célula",
+                "BishopValidMoveTest - Movimento diagonal válido do bispo",
+                "KingMoveTest - Movimento do rei",
+                "QueenMoveTest - Movimento da rainha",
+                "BlackPawnMoveTest - Movimento do peão preto"
         );
 
         List<String> testClasses = Arrays.asList(
@@ -23,7 +28,12 @@ public class TestRunnerAll {
                 "ru.job4j.chess.PawnInvalidMoveTest",
                 "ru.job4j.chess.RookCaptureTest",
                 "ru.job4j.chess.KnightMoveTest",
-                "ru.job4j.chess.BishopInvalidMoveTest"
+                "ru.job4j.chess.BishopInvalidMoveTest",
+                "ru.job4j.chess.FigureNotFoundExceptionTest",
+                "ru.job4j.chess.BishopValidMoveTest",
+                "ru.job4j.chess.KingMoveTest",
+                "ru.job4j.chess.QueenMoveTest",
+                "ru.job4j.chess.BlackPawnMoveTest"
         );
 
         for (int i = 0; i < testNames.size(); i++) {
