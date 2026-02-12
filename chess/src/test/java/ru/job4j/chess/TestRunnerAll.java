@@ -11,6 +11,7 @@ public class TestRunnerAll {
         System.out.println("════════════════════════════════════════════");
 
         List<String> testNames = Arrays.asList(
+                "LogicTest - Exceção ao mover de célula vazia",
                 "PawnWhiteMoveTest - Movimento válido do peão branco",
                 "PawnInvalidMoveTest - Movimento inválido do peão",
                 "RookCaptureTest - Captura da torre",
@@ -24,6 +25,7 @@ public class TestRunnerAll {
         );
 
         List<String> testClasses = Arrays.asList(
+                "ru.job4j.chess.LogicTest",
                 "ru.job4j.chess.PawnWhiteMoveTest",
                 "ru.job4j.chess.PawnInvalidMoveTest",
                 "ru.job4j.chess.RookCaptureTest",

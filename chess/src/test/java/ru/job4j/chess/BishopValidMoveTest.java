@@ -5,7 +5,6 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.white.BishopWhite;
-import ru.job4j.chess.figures.Figure;
 
 public class BishopValidMoveTest {
 
@@ -18,28 +17,20 @@ public class BishopValidMoveTest {
     }
 
     @Test
-    public void whenBishopMovesDiagonallyThenMoveSucceeds() {
-        Figure bishop = new BishopWhite(Cell.C1);
-        logic.add(bishop);
+    public void whenBishopMovesDiagonallyThenMoveSucceeds() throws Exception {
+        logic.add(new BishopWhite(Cell.C1));
 
-        try {
-            logic.move(Cell.C1, Cell.G5);
-            assertTrue("Bispo deveria mover na diagonal sem exceção", true);
-        } catch (Exception e) {
-            fail("Movimento diagonal do bispo falhou: " + e.getMessage());
-        }
+        logic.move(Cell.C1, Cell.G5);
+        assertNotNull("Bispo deveria estar em G5", logic.getFigureAt(Cell.G5));
+        assertEquals("Bispo deveria estar em G5", Cell.G5, logic.getFigureAt(Cell.G5).position());
     }
 
     @Test
-    public void whenBishopMovesToDifferentDiagonalThenMoveSucceeds() {
-        Figure bishop = new BishopWhite(Cell.F1);
-        logic.add(bishop);
+    public void whenBishopMovesToDifferentDiagonalThenMoveSucceeds() throws Exception {
+        logic.add(new BishopWhite(Cell.F1));
 
-        try {
-            logic.move(Cell.F1, Cell.A6);
-            assertTrue("Bispo deveria mover na diagonal", true);
-        } catch (Exception e) {
-            fail("Movimento diagonal do bispo falhou: " + e.getMessage());
-        }
+        logic.move(Cell.F1, Cell.A6);
+        assertNotNull("Bispo deveria estar em A6", logic.getFigureAt(Cell.A6));
+        assertEquals("Bispo deveria estar em A6", Cell.A6, logic.getFigureAt(Cell.A6).position());
     }
 }

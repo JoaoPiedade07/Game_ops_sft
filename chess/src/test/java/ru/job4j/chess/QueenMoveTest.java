@@ -5,7 +5,6 @@ import org.junit.Before;
 import static org.junit.Assert.*;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.white.QueenWhite;
-import ru.job4j.chess.figures.Figure;
 
 public class QueenMoveTest {
 
@@ -18,28 +17,20 @@ public class QueenMoveTest {
     }
 
     @Test
-    public void whenQueenMovesVerticallyThenMoveSucceeds() {
-        Figure queen = new QueenWhite(Cell.D1);
-        logic.add(queen);
+    public void whenQueenMovesVerticallyThenMoveSucceeds() throws Exception {
+        logic.add(new QueenWhite(Cell.D1));
 
-        try {
-            logic.move(Cell.D1, Cell.D5);
-            assertTrue("Rainha deveria mover na vertical sem exceção", true);
-        } catch (Exception e) {
-            fail("Movimento vertical da rainha falhou: " + e.getMessage());
-        }
+        logic.move(Cell.D1, Cell.D5);
+        assertNotNull("Rainha deveria estar em D5", logic.getFigureAt(Cell.D5));
+        assertEquals("Rainha deveria estar em D5", Cell.D5, logic.getFigureAt(Cell.D5).position());
     }
 
     @Test
-    public void whenQueenMovesHorizontallyThenMoveSucceeds() {
-        Figure queen = new QueenWhite(Cell.D4);
-        logic.add(queen);
+    public void whenQueenMovesHorizontallyThenMoveSucceeds() throws Exception {
+        logic.add(new QueenWhite(Cell.D4));
 
-        try {
-            logic.move(Cell.D4, Cell.H4);
-            assertTrue("Rainha deveria mover na horizontal", true);
-        } catch (Exception e) {
-            fail("Movimento horizontal da rainha falhou: " + e.getMessage());
-        }
+        logic.move(Cell.D4, Cell.H4);
+        assertNotNull("Rainha deveria estar em H4", logic.getFigureAt(Cell.H4));
+        assertEquals("Rainha deveria estar em H4", Cell.H4, logic.getFigureAt(Cell.H4).position());
     }
 }
