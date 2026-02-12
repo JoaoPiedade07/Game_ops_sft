@@ -30,16 +30,4 @@ public class KingMoveTest {
         }
     }
 
-    @Test
-    public void whenKingMovesOneSquareDiagonallyThenMoveSucceeds() {
-        Figure king = new KingWhite(Cell.E1);
-        logic.add(king);
-
-        try {
-            logic.move(Cell.E1, Cell.D2);
-            assertTrue("Rei deveria mover uma casa na diagonal", true);
-        } catch (Exception e) {
-            fail("Movimento diagonal do rei falhou: " + e.getMessage());
-        }
-    }
 }

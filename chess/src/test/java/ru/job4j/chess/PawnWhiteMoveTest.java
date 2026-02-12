@@ -65,7 +65,6 @@ public class PawnWhiteMoveTest {
             logic.move(Cell.A2, Cell.A5);
             fail("Peão não deveria mover 3 casas!");
         } catch (ImpossibleMoveException e) {
-            // Sucesso - exceção esperada
             assertTrue("Peão não pode mover 3 casas", true);
         } catch (Exception e) {
             fail("Exceção errada: " + e.getClass().getSimpleName());

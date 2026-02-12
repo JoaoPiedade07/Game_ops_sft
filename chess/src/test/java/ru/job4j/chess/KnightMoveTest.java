@@ -30,7 +30,6 @@ public class KnightMoveTest {
             assertEquals("Após mover, cavalo deveria estar em C3",
                     Cell.C3, movedKnight.position());
             
-            // Verificar que a posição original está vazia
             assertNull("Posição original deveria estar vazia", 
                     logic.getFigureAt(Cell.B1));
 

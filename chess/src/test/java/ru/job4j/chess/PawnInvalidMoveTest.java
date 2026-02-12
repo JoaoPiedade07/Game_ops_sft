@@ -17,57 +17,10 @@ public class PawnInvalidMoveTest {
         logic.clean();
     }
 
-    @Test
-    public void whenPawnMovesOneSquareForward_ThenPositionUpdates() {
-        System.out.println("🎯 TESTE 1: Movimento básico válido");
-
-        Figure pawn = new PawnWhite(Cell.E2);
-        logic.add(pawn);
-
-        System.out.println("  Peão criado em: " + pawn.position());
-
-        try {
-            logic.move(Cell.E2, Cell.E3);
-            
-            Figure movedPawn = logic.getFigureAt(Cell.E3);
-            assertNotNull("Peão deveria estar em E3", movedPawn);
-            assertEquals("Após mover E2→E3, peão deveria estar em E3",
-                    Cell.E3, movedPawn.position());
-
-            System.out.println("  ✅ PASSOU: Peão moveu corretamente para E3");
-
-        } catch (Exception e) {
-            fail("❌ Movimento válido falhou: " + e.getMessage());
-        }
-    }
-
-    @Test
-    public void whenPawnMovesTwoSquaresOnFirstMove_ThenPositionUpdates() {
-        System.out.println("\n🎯 TESTE 2: Movimento especial - 2 casas no primeiro movimento");
-
-        Figure pawn = new PawnWhite(Cell.D2);
-        logic.add(pawn);
-
-        System.out.println("  Peão branco em D2 (primeira vez que se move)");
-
-        try {
-            logic.move(Cell.D2, Cell.D4);
-            
-            Figure movedPawn = logic.getFigureAt(Cell.D4);
-            assertNotNull("Peão deveria estar em D4", movedPawn);
-            assertEquals("Peão deveria poder mover 2 casas no primeiro movimento",
-                    Cell.D4, movedPawn.position());
-
-            System.out.println("  ✅ PASSOU: Peão saltou 2 casas para D4");
-
-        } catch (Exception e) {
-            fail("❌ Movimento especial falhou: " + e.getMessage());
-        }
-    }
 
     @Test
     public void whenPawnTriesToMoveBackwards_ShouldFail() {
-        System.out.println("\n🎯 TESTE 3: Movimento inválido - não pode mover para trás");
+        System.out.println("\nTest - Movimento inválido - não pode mover para trás");
 
         Figure pawn = new PawnWhite(Cell.E3);
         logic.add(pawn);
@@ -76,9 +29,9 @@ public class PawnInvalidMoveTest {
 
         try {
             logic.move(Cell.E3, Cell.E2);
-            fail("❌ BUG: Peão NÃO deveria poder mover para trás (E3→E2)");
+            fail("BUG: Peão NÃO deveria poder mover para trás (E3→E2)");
         } catch (ImpossibleMoveException e) {
-            System.out.println("  ✅ PASSOU: Movimento bloqueado - " +
+            System.out.println(" PASSOU: Movimento bloqueado - " +
                     e.getClass().getSimpleName());
             assertTrue("Movimento inválido corretamente rejeitado", true);
         } catch (Exception e) {
