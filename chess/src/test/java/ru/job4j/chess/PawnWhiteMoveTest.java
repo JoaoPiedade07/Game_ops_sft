@@ -55,4 +55,5 @@ public class PawnWhiteMoveTest {
             fail("Movimento de 2 casas falhou: " + e.getMessage());
         }
     }
+
 }
