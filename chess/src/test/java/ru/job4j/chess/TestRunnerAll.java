@@ -7,7 +7,7 @@ import java.util.*;
 
 public class TestRunnerAll {
     public static void main(String[] args) {
-        System.out.println("\n📋  LISTA DE TESTES DO XADREZ");
+        System.out.println("\n LISTA DE TESTES DO XADREZ");
         System.out.println("════════════════════════════════════════════");
 
         List<String> testNames = Arrays.asList(
@@ -39,17 +39,22 @@ public class TestRunnerAll {
 
         try {
             Class<?>[] testClassesArray = new Class[testClasses.size()];
+            // Cria um "container" vazio para guardar as classes de teste
             for (int i = 0; i < testClasses.size(); i++) {
                 testClassesArray[i] = Class.forName(testClasses.get(i));
             }
+            // Pega cada nome de classe (ex: "PawnWhiteMoveTest") e carrega ela na memória
 
             Result result = JUnitCore.runClasses(testClassesArray);
+            // Manda o JUnit executar TODOS os testes dessas classes
 
+            
             Set<String> failedTests = new HashSet<>();
             for (Failure failure : result.getFailures()) {
                 String className = failure.getDescription().getClassName();
                 failedTests.add(className);
             }
+            // Guarda quais classes tiveram falhas para mostrar depois
 
             System.out.println("\n════════════════════════════════════════════");
             System.out.println("RESULTADO DOS TESTES:");
@@ -108,7 +113,7 @@ public class TestRunnerAll {
 
             System.exit(result.wasSuccessful() ? 0 : 1);
 
-        } catch (ClassNotFoundException e) { //Erro específico
+        } catch (ClassNotFoundException e) { //Erro específico (Classe)
             System.err.println("\n❌ ERRO: Classe de teste não encontrada!");
             System.err.println("Detalhes: " + e.getMessage());
             System.exit(1);
