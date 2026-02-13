@@ -17,20 +17,15 @@ public class KingMoveTest {
     }
 
     @Test
-    public void whenKingMovesOneSquareForwardThenMoveSucceeds() throws Exception {
+    public void whenKingMovesOneSquareForwardAndDiagonallyThenMoveSucceeds() throws Exception {
         logic.add(new KingWhite(Cell.E1));
 
         logic.move(Cell.E1, Cell.E2);
         assertNotNull("Rei deveria estar em E2", logic.getFigureAt(Cell.E2));
         assertEquals("Rei deveria estar em E2", Cell.E2, logic.getFigureAt(Cell.E2).position());
-    }
 
-    @Test
-    public void whenKingMovesOneSquareDiagonallyThenMoveSucceeds() throws Exception {
-        logic.add(new KingWhite(Cell.E1));
-
-        logic.move(Cell.E1, Cell.D2);
-        assertNotNull("Rei deveria estar em D2", logic.getFigureAt(Cell.D2));
-        assertEquals("Rei deveria estar em D2", Cell.D2, logic.getFigureAt(Cell.D2).position());
+        logic.move(Cell.E2, Cell.D3);
+        assertNotNull("Rei deveria estar em D3", logic.getFigureAt(Cell.D3));
+        assertEquals("Rei deveria estar em D3", Cell.D3, logic.getFigureAt(Cell.D3).position());
     }
 }

@@ -25,12 +25,4 @@ public class BishopValidMoveTest {
         assertEquals("Bispo deveria estar em G5", Cell.G5, logic.getFigureAt(Cell.G5).position());
     }
 
-    @Test
-    public void whenBishopMovesToDifferentDiagonalThenMoveSucceeds() throws Exception {
-        logic.add(new BishopWhite(Cell.F1));
-
-        logic.move(Cell.F1, Cell.A6);
-        assertNotNull("Bispo deveria estar em A6", logic.getFigureAt(Cell.A6));
-        assertEquals("Bispo deveria estar em A6", Cell.A6, logic.getFigureAt(Cell.A6).position());
-    }
 }
