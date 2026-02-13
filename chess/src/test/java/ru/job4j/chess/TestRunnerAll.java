@@ -100,22 +100,19 @@ public class TestRunnerAll {
             System.out.println("");
             System.out.println("════════════════════════════════════════════");
             if (result.wasSuccessful()) {
-                System.out.println("🎉 TODOS OS TESTES PASSARAM COM SUCESSO!");
+                System.out.println("TODOS OS TESTES PASSARAM COM SUCESSO!");
             } else {
-                System.out.println("⚠️  ALGUNS TESTES FALHARAM. VERIFIQUE OS DETALHES.");
+                System.out.println("❌ ALGUNS TESTES FALHARAM. VERIFIQUE OS DETALHES.");
             }
             System.out.println("════════════════════════════════════════════");
 
             System.exit(result.wasSuccessful() ? 0 : 1);
 
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) { //Erro específico
             System.err.println("\n❌ ERRO: Classe de teste não encontrada!");
             System.err.println("Detalhes: " + e.getMessage());
-            System.err.println("\nVerifique se:");
-            System.err.println("1. Os testes foram compilados: mvn test-compile");
-            System.err.println("2. O nome da classe está correto");
             System.exit(1);
-        } catch (Exception e) {
+        } catch (Exception e) { //Erro genérico
             System.err.println("\n❌ ERRO INESPERADO: " + e.getMessage());
             e.printStackTrace();
             System.exit(1);
